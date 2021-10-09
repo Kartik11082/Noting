@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<br><br><br>
+<h1> Login </h1>
+or
+<a class="button" style="border-radius: 10px; text-decoration: none; color: rgb(16, 68, 99)"
+	href="{% url 'usignup' %}">SignUp</a> here
+	<br><br>
+<form method="POST" autofill="off">
+	{% csrf_token %}
+	<input class="userInput" style="border-radius: 20px; border-color: rgb(32, 45, 143);" type="text"
+		name="loginUsername" placeholder="Username" autocomplete="off" required>
+	<br><br>
+	<input class="userInput" style="border-radius: 20px; border-color: rgb(32, 45, 143);" type="password"
+		name="loginpassword" placeholder="Password" autocomplete="off" required>
+	<br><br>
+	<p>
+		&nbsp;&nbsp;&nbsp;<input class="button"
+			style="border-radius: 10px; border-width: 3px; border-color: rgb(32, 45, 143);" type="submit" value="Login">
+		&nbsp;
+		<a class="button" style="border-radius: 10px; text-decoration: none; color: rgb(16, 68, 99)"
+			href="{% url 'uresetPass' %}">Forgot password?</a>
+	</p>
+</form>
+<div id="hidethis">
+	<p style="padding-top: 5px;">
+		{{ msg }}
+	</p>
+</div>
+{% endblock %}

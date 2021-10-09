@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+<br><br><br>
+<h1> SignUp </h1>
+<form method="POST" autofill="off">
+	{% csrf_token %}
+	<input class="userInput" style="border-radius: 20px; border-color: rgb(32, 45, 143);" type="text"
+		name="signupUsername" placeholder="Username" autocomplete="off" required>
+	<br><br>
+	<input class="userInput" style="width: 600px; border-radius: 20px; border-color: rgb(32, 45, 143);" type="email"
+		name="signupEmail" placeholder="Email" autocomplete="off" required>
+	<br><br>
+	<input class="button" style="border-radius: 10px; border-width: 3px; border-color: rgb(32, 45, 143);" type="submit"
+		value="Sign Up">
+	<br>
+</form>
+<label style="color: rgb(8, 35, 51);"> Password will be sent to your Email<br>
+	Already have an account?
+	<a class="button" style="padding: none; border-radius: 10px; text-decoration: none; color: rgb(16, 68, 99)"
+		href="{% url 'ulogin' %}">Login</a>
+</label>
+<br>
+<div id="hidethis">
+	<p style="padding-top: 5px;">
+		{{ msg }}
+	</p>
+</div>
+{% endblock %}

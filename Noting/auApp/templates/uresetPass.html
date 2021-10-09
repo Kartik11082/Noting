@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Reset Password {% endblock %}
+
+{% block content %}
+<br><br><br>
+<h1> Reset Password </h1>
+<form method="POST" autofill="off">
+	{% csrf_token %}
+	<input class="userInput" style="border-radius: 20px; border-color: rgb(32, 45, 143);" type="text"
+		name="resetPassUsername" placeholder="Username" autocomplete="off" required>
+	<br><br>
+	<input class="userInput" style="width: 600px; border-radius: 20px; border-color: rgb(32, 45, 143);" type="email"
+		name="resetPassEmail" placeholder="Email" autocomplete="off" required>
+	<br><br>
+	<input class="button" style="border-radius: 10px; border-width: 3px; border-color: rgb(32, 45, 143);" type="submit"
+		value="Request Password">
+	<br>
+</form>
+<label style="color: rgb(8, 35, 51);"> New password will be sent to your Email </label>
+<br><br>
+<div id="hidethis">
+	<p style="padding-top: 5px;">
+		{{ msg }}
+	</p>
+</div>
+{% endblock %}

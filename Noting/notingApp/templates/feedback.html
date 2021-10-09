@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Feedback {% endblock %}
+
+{% block content %}
+<br>
+<u>
+    <h1> Feedback </h1>
+</u>
+<form method="POST" autofill="off">
+    {% csrf_token %}
+    <label style="font-weight: lighter; font-size: 18; color: rgb(8, 35, 51);"> Your feedback helps us improve </label>
+    <br><br>
+    <textarea
+        style="word-wrap: break-word; overflow: hidden; width: 50%; height: 30%; border-radius: 20px; border-color: rgb(32, 45, 143);"
+        name="feedbackMessage" cols="30" rows="10" placeholder="Enter your Feedback here"></textarea>
+    <br><br>
+    <p>
+        <input class="button" style="border-radius: 10px; border-width: 3px; border-color: rgb(32, 45, 143);" type="submit"
+            value="Submit">
+    <div id="hidethis">
+        {% if msg %}
+        {{ msg }}
+        {% else %}
+        {{ msg }}
+        {% endif %}
+    </div>
+    </p>
+</form>
+{% endblock %}

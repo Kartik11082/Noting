@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		a:hover {
+			background-color: rgb(98, 206, 214);
+			border-radius: 10px;
+		}
+
+		.descClass {
+			white-space: normal;
+			overflow: auto;
+			text-overflow: clip;
+		}
+
+		.labelBorder {
+			padding-bottom: 100px;
+		}
+
+		body {
+			-ms-overflow-style: none;
+			/* for Internet Explorer, Edge */
+			scrollbar-width: none;
+			/* for Firefox */
+			overflow-y: scroll;
+		}
+
+		body::-webkit-scrollbar {
+			display: none;
+			/* for Chrome, Safari, and Opera */
+		}
+
+		.homeBorder {
+			border-style: inset;
+			padding-bottom: 20px;
+		}
+
+		#noting {
+			border: 0;
+			padding: 0;
+			font-size: 35px;
+			background-color: rgb(13, 185, 185);
+			font-family: Courier;
+		}
+
+		a {
+			text-decoration: none
+		}
+
+		.delete {
+			font-weight: bold;
+			padding-bottom: 10px;
+		}
+
+		body {
+			background-color: rgba(190, 190, 184, 0.726);
+		}
+
+		h2 {
+			font-size: 35px;
+		}
+
+		#nav {
+			font-size: 35px;
+			font-family: Courier
+		}
+
+		#nav {
+			background-color: Teal;
+		}
+
+		#nav a {
+			text-decoration: none;
+			padding-right: 25px;
+			padding-left: 25px;
+			;
+			color: Black;
+		}
+
+		.accordion {
+			background-color: #eee;
+			color: #444;
+			cursor: pointer;
+			padding: 18px;
+			width: 100%;
+			border: none;
+			width: 50%;
+			border-radius: 30px;
+			text-align: left;
+			outline: none;
+			font-size: 20px;
+			transition: 0.4s;
+		}
+
+		.active,
+		.accordion:hover {
+			color: rgb(0, 0, 0);
+			background-color: rgb(98, 206, 214);
+			padding-bottom: 28px;
+		}
+
+		.panel {
+			width: 40%;
+			border-bottom-left-radius: 30px;
+			border-bottom-right-radius: 30px;
+			padding: 0 18px;
+			display: none;
+			background-color: rgba(49, 153, 201, 0.274);
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="">
+		<center>
+			<div id="nav">
+				<a href="{% url 'home' %}">Home</a>
+				{% if user.is_authenticated %}
+				<a href="{% url 'createNote' %}">Create</a>
+				<a href="{% url 'ulogout' %}">Logout</a>
+				{% else %}
+				<a href="{% url 'ulogin' %}">Login</a>
+				<a href="{% url 'usignup' %}">SignUp</a>
+				<a href="{% url 'uresetPass' %}">ResetPassword</a>
+				{% endif %}
+				<a href="{% url 'feedback' %}">Feedback</a>
+			</div>
+			{% block content %} {% endblock %}
+
+			<h2>Welcome to Noting, {{ user.username }}</h2>
+
+		</center>
+
+		<div class="homeBorder">
+			{% if notes %}
+			{% for note in notes %}
+			<center>
+				<br>
+				<button class="accordion">
+					<u>
+						<p style="font-size: 15px;"> Title </p>
+					</u>
+					<p style="font-size: 25px; font-weight: lighter">
+						{{ note.title }}
+					</p>
+				</button>
+				<div class="panel">
+					<u>
+						<p style="font-size: 15px; font-weight: lighter"> Description </p>
+					</u>
+					<div class="descClass">
+						{% if note.description and note.description.strip %}
+						<p> {{ note.description|linebreaks }} </p>
+						{% else %}
+						<p>No Description added</p>
+						{% endif %}
+					</div>
+					<p style="font-size: 18px; font-weight: lighter;"> Posted on {{ note.date_posted.date }}</p>
+					<div class="delete">
+						<button style="border-radius: 10px; background-color: rgb(26, 64, 114);">
+							<a style="color: white;" id="delete" href="{% url 'deleteNote' noteID=note.noteID %}"
+								onclick="return confirm('Are you sure')">Delete</a>
+						</button>
+					</div>
+				</div>
+				<br>
+			</center>
+			{% endfor %}
+			{% else %}
+			<center>
+				<label class="labelBorder" style="font-size: 35px;font-family: Comic Sans MS ; color: rgb(8, 35, 51);">
+					Notes you add appear
+					here </label>
+			</center>
+			{% endif %}
+		</div>
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+			var i;
+
+			for (i = 0; i < acc.length; i++) {
+				acc[i].addEventListener("click", function () {
+					this.classList.toggle("active");
+					var panel = this.nextElementSibling;
+					if (panel.style.display === "block") {
+						panel.style.display = "none";
+					} else {
+						panel.style.display = "block";
+					}
+				});
+			}
+		</script>
+	</div>
+
+</body>
+
+</html>

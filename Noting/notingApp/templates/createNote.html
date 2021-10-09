@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<br>
+<u>
+	<h1> Create Note </h1>
+</u>
+<form method="POST" autofill="off">
+	{% csrf_token %}
+	<input class="userInput" style="border-radius: 20px; border-color: rgb(32, 45, 143);" autocomplete="off" type="text"
+		name="noteTitle" placeholder="Title" style="width: 400px; height: 50px">
+	<br><br>
+	<textarea class="userInput"
+		style="word-wrap: break-word; overflow: hidden; width: 50%; height: 30%; border-radius: 20px; border-color: rgb(32, 45, 143);"
+		name="noteDesc" cols="30" rows="10" placeholder="Note"></textarea>
+	<br><br>
+	<p>
+		<input class="button" style="border-radius: 10px; border-width: 3px; border-color: rgb(32, 45, 143);"
+			type="submit" value="Create">
+	<div id="hidethis">
+		{% if msg %}
+		{{ msg }}
+		{% else %}
+		{{ msg }}
+		{% endif %}
+	</div>
+	</p>
+</form>
+{% endblock %}

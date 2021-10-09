@@ -1,0 +1,115 @@
+{% load static %}
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title> {% block title %} {% endblock %} </title>
+	<style>
+		a:hover {
+			background-color: rgb(98, 206, 214);
+			border-radius: 10px;
+		}
+
+		#hidethis {
+			animation: css 0s 3s forwards;
+		}
+
+		@keyframes css {
+			to {
+				visibility: hidden;
+			}
+		}
+
+		/*  */
+		/* visibility / overflow: hidden; */
+		::-webkit-input-placeholder {
+			color: red;
+			text-align: center;
+		}
+
+		:-moz-placeholder {
+			/* Firefox 18- */
+			color: rgb(16, 70, 70);
+			text-align: center;
+		}
+
+		::-moz-placeholder {
+			/* Firefox 19+ */
+			color: rgb(16, 70, 70);
+			text-align: center;
+		}
+
+		:-ms-input-placeholder {
+			color: rgb(16, 70, 70);
+			text-align: center;
+		}
+
+		.button {
+			transition-duration: 0.4s;
+		}
+
+		.button:hover {
+			background-color: rgb(13, 185, 185);
+			/* Green */
+			color: rgb(122, 55, 16);
+		}
+
+		.userInput {
+			transition-duration: 0.4s;
+		}
+
+		.userInput:hover {
+			background-color: rgb(13, 185, 185);
+			/* Green */
+			color: rgb(0, 0, 0);
+		}
+
+		body {
+			background-color: rgba(190, 190, 184, 0.726);
+		}
+
+		* {
+			font-size: 35px;
+			font-family: Courier
+		}
+
+		#noting {
+			background-color: rgb(13, 185, 185);
+		}
+
+		#nav {
+			background-color: Teal;
+		}
+
+		#nav a {
+			text-decoration: none;
+			padding-right: 25px;
+			padding-left: 25px;
+			color: Black;
+		}
+
+		input {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+		<div id="nav">
+			{% if user.is_authenticated %}
+			<a href="{% url 'home' %}">Home</a>
+			<a href="{% url 'createNote' %}">Create</a>
+			<a href="{% url 'ulogout' %}">Logout</a>
+			{% else %}
+			<a href="{% url 'ulogin' %}">Login</a>
+			<a href="{% url 'usignup' %}">SignUp</a>
+			<a href="{% url 'uresetPass' %}">ResetPassword</a>
+			{% endif %}
+			<a href="{% url 'feedback' %}">Feedback</a>
+		</div>
+		{% block content %} {% endblock %}
+	</center>
+</body>
+
+</html>
